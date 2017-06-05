@@ -70,4 +70,6 @@ Rails.application.routes.draw do
   # Routes for like resource:
   # READ
   get "/my_likes", :controller => "mylikes", :action => "index"
+
+
 end

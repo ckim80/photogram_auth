@@ -16,20 +16,17 @@
         <h3 class="panel-title"><a href="/users/<%= photo.user_id %>"> <%= photo.user.username %> </a>
           <small><%= time_ago_in_words(photo.created_at)%> ago </small>
         </h3>
+
         <div class="panel-body">
-          <a href="/photos/<%= photo.id %>">
-            <img src="<%= photo.image %>" class="img-responsive">
+          <a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive">
           </a>
 
           <p>
             <form action="/create_like" method="post">
               <!-- Hidden input for authenticity token to protect from forgery -->
               <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
               <input type="hidden" name="photo_id" value="<%= photo.id %>">
-
               <input type="hidden" name="user_id" value="<%= current_user.id %>">
-
               <button class="btn btn-link">
                 <i class="fa fa-heart-o"></i>
               </button>
@@ -45,12 +42,12 @@
 
         </div>
 
+      <ul class="media-list">
         <% photo.comments.each do |comment| %>
-        <ul class="media-list">
           <li class="media">
             <div class="media-body">
               <h6 class="media-heading">
-                <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                <a href="/users/<%= photo.user_id %>"><%= comment.user.username %></a>
                 <small>
                   <%= time_ago_in_words(comment.created_at)%> ago
                 </small>
@@ -66,9 +63,7 @@
             <form action="/create_comment" method="post">
               <!-- Hidden input for authenticity token to protect from forgery -->
               <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
               <input type="hidden" id="photo_id" name="photo_id" class="form-control" value="<%= photo.id %>">
-
               <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
 
               <!-- Label and input for body -->

@@ -1,36 +1,22 @@
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="jumbotron">
-      <h3>
-        <%= @user.username %>
-      </h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <a href="/photos/new" class="btn btn-default btn-block">
-        <i class="fa fa-plus"></i>
-      </a>
-      <hr>
-    </div>
-  </div>
-  <% @user.photos.each do |photo| %>
+  <p>
+  <% @likes.each do |like| %>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3><%= photo.caption %></h3>
-          <h3 class="panel-title"><a href="/users/<%= photo.user_id %>"><%= @user.username %></a>
-            <small><%= time_ago_in_words(photo.created_at)%> ago </small>
+          <h3><%= like.photo.caption %>
+          <h3 class="panel-title"><a href="/users/<%= like.user_id %>"><%= like.photo.user.username %></a>
+            <small><%= time_ago_in_words(like.photo.created_at)%> ago </small>
           </h3>
         </div>
         <div class="panel-body">
-          <img src="<%= photo.image %>" class="img-responsive">
+          <img src="<%= like.photo.image %>" class="img-responsive">
         </div>
       </div>
     </div>
   </div>
-  <% photo.comments.each do |comment| %>
+  <% like.photo.comments.each do |comment| %>
   <ul class="media-list">
     <li class="media">
       <div class="col-md-8 col-md-offset-2">
